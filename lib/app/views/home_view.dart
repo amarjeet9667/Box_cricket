@@ -1,0 +1,25 @@
+
+import 'package:box_cricket/app/constants/app_sizes.dart';
+import 'package:box_cricket/app/themes/app_theme.dart';
+import 'package:box_cricket/app/views/home_view_mob.dart';
+import 'package:box_cricket/app/views/home_view_web.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controllers/home_controller.dart';
+
+class HomeView extends StatelessWidget {
+  final HomeController controller = Get.put(HomeController());
+  final ThemeController themeController = Get.find<ThemeController>();
+
+  HomeView({super.key}); 
+
+  @override
+  Widget build(BuildContext context) {
+    
+    if(context.width > screenWidth){
+    return WebHomeView(controller: controller);
+    }else{
+      return MobHomeView(controller: controller);
+    }
+  }
+}
