@@ -1,4 +1,5 @@
 import 'package:box_cricket/app/constants/app_colors.dart';
+import 'package:box_cricket/app/routes/app_routes.dart';
 import 'package:box_cricket/app/themes/app_theme.dart';
 import 'package:box_cricket/app/widgets/app_launcher.dart';
 import 'package:box_cricket/app/widgets/socialmedia_button.dart';
@@ -15,7 +16,8 @@ class MobHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
+      appBar: AppBar(backgroundColor: AppColors.purple,toolbarHeight: 30,),
       body: SafeArea(
         child: Stack(
           children: [
@@ -25,26 +27,14 @@ class MobHomeView extends StatelessWidget {
                 bottom: 80,
               ), // leave space for button
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0.8),
+                padding: const EdgeInsets.symmetric(vertical: 0),
                 child: Column(
                   children: [
-                    Container(
-                      height: 60,
-                      color: Colors.purple.shade700,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Box Cricket",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   height: 60,
+                    //   color: Colors.purple.shade700,
+                      
+                    // ),
 
                     const SizedBox(height: 20),
 
@@ -253,7 +243,9 @@ class MobHomeView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(AppRoutes.userInfo);
+                },
                 child: const Text(
                   "NEXT",
                   style: TextStyle(fontSize: 18, color: Colors.white),

@@ -2,13 +2,15 @@ import 'package:box_cricket/app/themes/app_theme.dart';
 import 'package:box_cricket/app/themes/dark_theme.dart';
 import 'package:box_cricket/app/themes/light_theme.dart';
 import 'package:box_cricket/app/utils/network_checker.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app/routes/app_routes.dart';
 import 'app/routes/app_pages.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   Get.put(ThemeController());
   Get.put(NetworkChecker());
