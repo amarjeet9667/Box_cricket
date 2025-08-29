@@ -27,7 +27,7 @@ class WebHomeView extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.sports_cricket,
-                        color: Colors.purple,
+                        color: AppColors.primary,
                         size: 32,
                       ),
                       SizedBox(width: 8),
@@ -54,7 +54,7 @@ class WebHomeView extends StatelessWidget {
                   // Poster Image
                   Center(
                     child: Image.asset(
-                      "assets/images/box_crik.png",
+                      "assets/images/deghumake.png",
                       height: 600,
                       fit: BoxFit.contain,
                     ),
@@ -133,12 +133,12 @@ class WebHomeView extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.purple,
+                                color: AppColors.primary,
                               ),
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.purple,
+                                backgroundColor: AppColors.primary,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 40,
                                   vertical: 16,

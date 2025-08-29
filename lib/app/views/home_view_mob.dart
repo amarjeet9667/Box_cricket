@@ -17,7 +17,7 @@ class MobHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(backgroundColor: AppColors.purple,toolbarHeight: 30,),
+      appBar: AppBar(backgroundColor: AppColors.primary,toolbarHeight: 30,),
       body: SafeArea(
         child: Stack(
           children: [
@@ -84,7 +84,7 @@ class MobHomeView extends StatelessWidget {
                       ),
                       clipBehavior: Clip.hardEdge,
                       child: Image.asset(
-                        "assets/images/box_crik.png",
+                        "assets/images/deghumake.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -237,7 +237,7 @@ class MobHomeView extends StatelessWidget {
               bottom: 16,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple.shade700,
+                  backgroundColor: AppColors.primary,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

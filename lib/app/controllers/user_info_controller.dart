@@ -8,7 +8,7 @@ class UserInfoController extends GetxController {
   // Text Controllers
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();
-  final phoneController = TextEditingController();
+  final phoneController = TextEditingController(text: "+91 ");
 
   // Dropdown values
   var selectedDate = ''.obs;
@@ -69,9 +69,24 @@ class UserInfoController extends GetxController {
 
       await FirebaseFirestore.instance.collection("userBookings").add(data);
 
-      DialogHelper.showSnackBar(title: "Success", message: "Booking saved to Firebase ✅");
+      // Clear all fields after store in firebase
+      fullNameController.clear();
+      emailController.clear();
+      phoneController.text = "+91 "; 
+      selectedDate.value = dates.isNotEmpty ? dates.first : "";
+      selectedAgeGroup.value = "";
+      selectedLevel.value = "";
+      quantity.value = 1;
+
+      Get.back();
+      Get.back();
+
+      DialogHelper.showSnackBar(
+        title: "Success",
+        message: "Booking saved",
+      );
     } catch (e) {
-      DialogHelper.showSnackBar(title:"Error", message: e.toString());
+      DialogHelper.showSnackBar(title: "Error", message: e.toString());
     }
   }
 
@@ -91,4 +106,3 @@ class UserInfoController extends GetxController {
     _generateNextDates();
   }
 }
-
