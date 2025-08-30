@@ -1,4 +1,5 @@
-import 'package:box_cricket/app/helpers/dialog_helper.dart';
+import 'package:de_ghuma_ke/app/helpers/dialog_helper.dart';
+import 'package:de_ghuma_ke/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +9,7 @@ class UserInfoController extends GetxController {
   // Text Controllers
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();
-  final phoneController = TextEditingController(text: "+91 ");
+  final phoneController = TextEditingController(text: "+91");
 
   // Dropdown values
   var selectedDate = ''.obs;
@@ -69,22 +70,21 @@ class UserInfoController extends GetxController {
 
       await FirebaseFirestore.instance.collection("userBookings").add(data);
 
-      // Clear all fields after store in firebase
-      fullNameController.clear();
-      emailController.clear();
-      phoneController.text = "+91 "; 
-      selectedDate.value = dates.isNotEmpty ? dates.first : "";
-      selectedAgeGroup.value = "";
-      selectedLevel.value = "";
-      quantity.value = 1;
+      if (GetPlatform.isMobile) {
+        // on mobile: go to home
+        Get.offAllNamed(AppRoutes.home);
+      } else {
+        // on web/desktop: just clear
+        fullNameController.clear();
+        emailController.clear();
+        phoneController.text = "+91 ";
+        selectedDate.value = "";
+        selectedAgeGroup.value = "";
+        selectedLevel.value = "";
+        quantity.value = 1;
+      }
 
-      Get.back();
-      Get.back();
-
-      DialogHelper.showSnackBar(
-        title: "Success",
-        message: "Booking saved",
-      );
+      DialogHelper.showSnackBar(title: "Success", message: "Booking saved");
     } catch (e) {
       DialogHelper.showSnackBar(title: "Error", message: e.toString());
     }

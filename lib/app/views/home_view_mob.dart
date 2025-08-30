@@ -1,8 +1,8 @@
-import 'package:box_cricket/app/constants/app_colors.dart';
-import 'package:box_cricket/app/routes/app_routes.dart';
-import 'package:box_cricket/app/themes/app_theme.dart';
-import 'package:box_cricket/app/widgets/app_launcher.dart';
-import 'package:box_cricket/app/widgets/socialmedia_button.dart';
+import 'package:de_ghuma_ke/app/constants/app_colors.dart';
+import 'package:de_ghuma_ke/app/routes/app_routes.dart';
+import 'package:de_ghuma_ke/app/themes/app_theme.dart';
+import 'package:de_ghuma_ke/app/widgets/app_launcher.dart';
+import 'package:de_ghuma_ke/app/widgets/socialmedia_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
@@ -17,7 +17,7 @@ class MobHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(backgroundColor: AppColors.primary,toolbarHeight: 30,),
+      appBar: AppBar(backgroundColor: AppColors.primary,toolbarHeight: 30),
       body: SafeArea(
         child: Stack(
           children: [
@@ -222,7 +222,7 @@ class MobHomeView extends StatelessWidget {
                     const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text("Once registered, the event fee will be non-refundable or non-transferrable to any future event.\n\nYou agree to share information entered on this page with SOILS (owner of this page) and Razorpay, adhering to applicable laws.",style: TextStyle(color: AppColors.black,fontSize: 14,fontWeight: FontWeight.w500),),
+                      child: Text("Please note that upon completion of registration, the event fee shall be strictly non-refundable and non-transferable to any future event.\n\nBy submitting your registration, you acknowledge and consent to the sharing of the information provided on this page with the event organizer and Razorpay, in compliance with all applicable data protection and privacy laws.",style: TextStyle(color: AppColors.black,fontSize: 14,fontWeight: FontWeight.w500),),
                     ),
                     const SizedBox(height: 20),
                   ],

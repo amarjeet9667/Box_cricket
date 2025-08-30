@@ -1,6 +1,6 @@
 
-import 'package:box_cricket/app/utils/logger.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:de_ghuma_ke/app/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

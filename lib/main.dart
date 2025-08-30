@@ -1,8 +1,9 @@
-import 'package:box_cricket/app/themes/app_theme.dart';
-import 'package:box_cricket/app/themes/dark_theme.dart';
-import 'package:box_cricket/app/themes/light_theme.dart';
-import 'package:box_cricket/app/utils/network_checker.dart';
-import 'package:box_cricket/firebase_options.dart';
+
+import 'package:de_ghuma_ke/app/themes/app_theme.dart';
+import 'package:de_ghuma_ke/app/themes/dark_theme.dart';
+import 'package:de_ghuma_ke/app/themes/light_theme.dart';
+import 'package:de_ghuma_ke/app/utils/network_checker.dart';
+import 'package:de_ghuma_ke/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
 
     return Obx(() => GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: "Flutter GetX MVC",
+          title: "De Ghuma Ke",
           initialRoute: AppRoutes.splash,
           getPages: AppPages.pages,
 

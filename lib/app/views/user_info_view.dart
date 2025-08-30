@@ -1,11 +1,13 @@
-import 'package:box_cricket/app/constants/app_colors.dart';
-import 'package:box_cricket/app/helpers/validators.dart';
+import 'package:de_ghuma_ke/app/constants/app_colors.dart';
+import 'package:de_ghuma_ke/app/helpers/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../controllers/user_info_controller.dart';
 
 class UserInfoView extends StatelessWidget {
-  final UserInfoController controller = Get.put(UserInfoController());
+  final UserInfoController controller = Get.find<UserInfoController>();
+
   final _formKey = GlobalKey<FormState>();
 
   UserInfoView({super.key});
@@ -17,7 +19,13 @@ class UserInfoView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         toolbarHeight: 30,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -40,20 +48,12 @@ class UserInfoView extends StatelessWidget {
                 _buildTextField(
                   "Phone",
                   controller.phoneController,
-                  (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Phone number cannot be empty";
-                    }
-                    if (!value.startsWith("+91")) {
-                      return "Phone must start with +91";
-                    }
-                    if (value.length != 14) {
-                      return "Phone must be +91 followed by 10 digits";
-                    }
-                    return null;
-                  },
+                  (v) => Validators.validatePhoneNumber(v),
                   keyboardType: TextInputType.phone,
-                  maxLength: 14
+                  maxLength: 14,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^\+?[0-9]*')),
+                  ],
                 ),
 
                 _buildDropdown(
@@ -109,13 +109,11 @@ class UserInfoView extends StatelessWidget {
   Widget _buildTextField(
     String label,
     TextEditingController textController,
-    String? Function(String?) validator, 
-    {
+    String? Function(String?) validator, {
     TextInputType keyboardType = TextInputType.text,
     int? maxLength,
-  }
-  
-  ) {
+    List<TextInputFormatter>? inputFormatters,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
@@ -124,6 +122,7 @@ class UserInfoView extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         maxLength: maxLength,
+        inputFormatters: inputFormatters,
         decoration: InputDecoration(
           labelText: label,
           counterText: "",

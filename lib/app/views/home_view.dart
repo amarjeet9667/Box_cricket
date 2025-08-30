@@ -1,8 +1,8 @@
 
-import 'package:box_cricket/app/constants/app_sizes.dart';
-import 'package:box_cricket/app/themes/app_theme.dart';
-import 'package:box_cricket/app/views/home_view_mob.dart';
-import 'package:box_cricket/app/views/home_view_web.dart';
+import 'package:de_ghuma_ke/app/constants/app_sizes.dart';
+import 'package:de_ghuma_ke/app/themes/app_theme.dart';
+import 'package:de_ghuma_ke/app/views/home_view_mob.dart';
+import 'package:de_ghuma_ke/app/views/home_view_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';

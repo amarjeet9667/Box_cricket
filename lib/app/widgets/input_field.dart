@@ -1,5 +1,5 @@
 
-import 'package:box_cricket/app/constants/app_colors.dart';
+import 'package:de_ghuma_ke/app/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {

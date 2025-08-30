@@ -1,7 +1,7 @@
 
-import 'package:box_cricket/app/bindings/user_info_binding.dart';
-import 'package:box_cricket/app/views/splash_view.dart';
-import 'package:box_cricket/app/views/user_info_view.dart';
+import 'package:de_ghuma_ke/app/bindings/user_info_binding.dart';
+import 'package:de_ghuma_ke/app/views/splash_view.dart';
+import 'package:de_ghuma_ke/app/views/user_info_view.dart';
 import 'package:get/get.dart';
 import '../views/home_view.dart';
 import '../bindings/home_binding.dart';
