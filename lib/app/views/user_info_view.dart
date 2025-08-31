@@ -18,7 +18,7 @@ class UserInfoView extends StatelessWidget {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        toolbarHeight: 30,
+        toolbarHeight: 52,
         automaticallyImplyLeading: true,
         leading: IconButton(
           onPressed: () {
@@ -116,21 +116,40 @@ class UserInfoView extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      child: TextFormField(
-        controller: textController,
-        cursorColor: AppColors.primary,
-        keyboardType: keyboardType,
-        validator: validator,
-        maxLength: maxLength,
-        inputFormatters: inputFormatters,
-        decoration: InputDecoration(
-          labelText: label,
-          counterText: "",
-          labelStyle: TextStyle(color: AppColors.primary),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primary),
+      child: RawKeyboardListener(
+        focusNode: FocusNode(),
+        onKey: (event) {
+          if (event.logicalKey.keyLabel == ' ') {
+            final controller = textController;
+            final text = controller.text;
+            final selection = controller.selection;
+            final newText = text.replaceRange(
+              selection.start,
+              selection.end,
+              ' ',
+            );
+            controller.text = newText;
+            controller.selection = TextSelection.collapsed(
+              offset: selection.start + 1,
+            );
+          }
+        },
+        child: TextFormField(
+          controller: textController,
+          cursorColor: AppColors.primary,
+          keyboardType: keyboardType,
+          validator: validator,
+          maxLength: maxLength,
+          inputFormatters: inputFormatters,
+          decoration: InputDecoration(
+            labelText: label,
+            counterText: "",
+            labelStyle: TextStyle(color: AppColors.primary),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.primary),
+            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
           ),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
     );
