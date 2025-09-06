@@ -30,6 +30,7 @@ dependencies:
   firebase_auth: ^6.0.1
   firebase_storage: ^13.0.0
   flutter_launcher_icons: ^0.14.4
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:

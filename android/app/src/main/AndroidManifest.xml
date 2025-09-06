@@ -1,10 +1,13 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.box_cricket">
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:label="box_cricket"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -19,9 +22,18 @@
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
 
+            <!-- Launcher intent -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- 👇 UPI Payment intent filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="upi" />
             </intent-filter>
         </activity>
 
@@ -30,9 +42,9 @@
             android:value="2" />
     </application>
 
-    <!-- 👇 Add queries for visibility -->
+    <!-- 👇 Queries (required for Android 11+ to detect other apps) -->
     <queries>
-        <!-- Default Flutter -->
+        <!-- Text sharing -->
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
@@ -72,5 +84,17 @@
             <data android:scheme="twitter"/>
         </intent>
         <package android:name="com.twitter.android"/>
+
+        <!-- 👇 UPI Payment Apps -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="upi"/>
+        </intent>
+
+        <!-- Common UPI apps -->
+        <package android:name="com.google.android.apps.nbu.paisa.user"/> <!-- Google Pay -->
+        <package android:name="com.phonepe.app"/> <!-- PhonePe -->
+        <package android:name="net.one97.paytm"/> <!-- Paytm -->
     </queries>
 </manifest>
+

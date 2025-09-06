@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserInfoController extends GetxController {
   // Text Controllers
@@ -89,6 +90,25 @@ class UserInfoController extends GetxController {
       DialogHelper.showSnackBar(title: "Error", message: e.toString());
     }
   }
+
+  /// Payment Controller method
+  Future<void> launchUPIPayment({
+    required String upiId,
+    required String name,
+    required String amount,
+    String note = "",
+  }) async {
+    final url = "upi://pay?pa=$upiId&pn=$name&am=$amount&cu=INR&tn=$note";
+
+    Uri uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw "No UPI app found to handle the request.";
+    }
+  }
+
 
   @override
   void onClose() {

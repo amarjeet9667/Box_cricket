@@ -85,13 +85,15 @@ class UserInfoView extends StatelessWidget {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        Get.snackbar(
-                          "Payment",
-                          "Proceed to pay ₹${controller.totalPrice}",
+                        await controller.launchUPIPayment(
+                          upiId: "964323193@ibl",
+                          name: "Box Cricket",
+                          amount: controller.totalPrice.toString(),
+                          note: "Box Cricket Registration",
                         );
-                        await controller.submitData();
                       }
                     },
+
                     child: Text(
                       "Pay ₹${controller.totalPrice}",
                       style: const TextStyle(fontSize: 16),

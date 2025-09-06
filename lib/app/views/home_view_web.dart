@@ -5,9 +5,11 @@ import 'package:de_ghuma_ke/app/widgets/socialmedia_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../controllers/home_controller.dart';
 import '../controllers/user_info_controller.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class WebHomeView extends StatelessWidget {
   final HomeController controller;
@@ -394,10 +396,76 @@ class WebHomeView extends StatelessWidget {
                                           onPressed: () async {
                                             if (_formKey.currentState!
                                                 .validate()) {
-                                              await user.submitData();
-                                              // On web this page IS the "home", so no navigation needed.
-                                              // If you still want to clear focus:
                                               FocusScope.of(context).unfocus();
+
+                                              final upiId = "964323193@ibl";
+                                              final name = "Box Cricket";
+                                              final amount =
+                                                  user.totalPrice.toString();
+                                              final note =
+                                                  "Box Cricket Registration";
+
+                                              if (GetPlatform.isMobile) {
+                                                // 🔹 Mobile: Launch UPI intent
+                                                await user.launchUPIPayment(
+                                                  upiId: upiId,
+                                                  name: name,
+                                                  amount: amount,
+                                                  note: note,
+                                                );
+
+                                                // ⚠️ Don't save yet, wait for confirmation
+                                                Get.snackbar(
+                                                  "Payment",
+                                                  "Complete your payment in the UPI app, then confirm.",
+                                                );
+                                              } else {
+                                                // 🔹 Web/Desktop: Show QR dialog
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (_) {
+                                                    return AlertDialog(
+                                                      title: const Text(
+                                                        "Scan & Pay",
+                                                      ),
+                                                      content: SizedBox(
+                                                        width: 260,
+                                                        height: 300,
+                                                        child: Center(
+                                                          child: QrImageView(
+                                                            data:
+                                                                "upi://pay?pa=$upiId&pn=$name&am=$amount&cu=INR&tn=$note",
+                                                            version:
+                                                                QrVersions.auto,
+                                                            size: 250,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () async {
+                                                            Navigator.pop(
+                                                              context,
+                                                            );
+
+                                                            // 🔹 Save only when user confirms payment
+                                                            await user
+                                                                .submitData();
+
+                                                            Get.snackbar(
+                                                              "Success",
+                                                              "Your booking has been recorded after payment.",
+                                                            );
+                                                          },
+                                                          child: const Text(
+                                                            "I have paid",
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
                                             }
                                           },
                                           child: Text(
@@ -446,7 +514,7 @@ class WebHomeView extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         maxLength: maxLength,
-        inputFormatters: inputFormatters, 
+        inputFormatters: inputFormatters,
         decoration: InputDecoration(
           labelText: label,
           counterText: "",
